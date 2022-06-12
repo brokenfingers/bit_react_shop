@@ -89,3 +89,31 @@
         box-shadow: .2em -.2em 0 0 currentcolor;
     }
 }
+
+
+
+.product-line_content {
+    .product-line_content_top {
+        .product-line_image {}
+
+        .product-line_title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .product-line_code {
+            font-size: 0.7rem;
+            color: rgb(113, 113, 113)
+        }
+
+        .product-line_price {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+    }
+
+    .product-line_content_bottom {}
+
+    .product-line_buttons {}
+}
