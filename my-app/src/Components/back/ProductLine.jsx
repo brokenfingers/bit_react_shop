@@ -14,15 +14,16 @@ function classNameName({ product }) {
                         {product.code}
                     </div>
                     <div className="product-line_price">
-                        {product.price}
+                        {product.price.toFixed(2) + 'EUR'}
                     </div>
                 </div>
                 <div className="product-line_content_bottom">
-                    {product.description}
+                    {product.description.slice(0, 80) + '...'}
                 </div>
             </div>
             <div className="product-line_buttons">
-
+                <button type="button" className="btn btn-success me-2">Redaguoti</button>
+                <button type="button" className="btn btn-danger">Trinti</button>
             </div>
         </li>
     )

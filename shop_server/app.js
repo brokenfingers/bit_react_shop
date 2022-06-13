@@ -27,6 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 
 
+
 //READ
 
 app.get('/admin/products', (req, res) => {
