@@ -1,5 +1,4 @@
-import { useContext } from "react"
-import { useState } from "react"
+import { useContext, useState, useRef } from "react"
 import BackContext from "../../Contexts/BackContext"
 
 const empty = {
@@ -10,7 +9,7 @@ const empty = {
 }
 
 function ProductCreate() {
-
+    const button = useRef()
 
     const { setCreatedData } = useContext(BackContext)
 
@@ -20,10 +19,11 @@ function ProductCreate() {
         setInputs(inp => ({ ...inp, [targ]: ev.target.value }))
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
         console.log(inputs)
         setCreatedData(inputs)
         setInputs(empty)
+        button.current.blur()
     }
 
 
@@ -50,7 +50,7 @@ function ProductCreate() {
                     <input type="text" className="form-control" onChange={(e) => handleInputs(e, 'description')} />
                 </div>
 
-                <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Sukurti</button>
+                <button ref={button} type="submit" className="btn btn-primary" onClick={handleSubmit}>Sukurti</button>
             </div>
         </div>
     )

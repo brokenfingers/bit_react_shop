@@ -55,18 +55,19 @@ app.get('/admin/products', (req, res) => {
 
 // //WRITE
 
-// app.post('/trees', (req, res) => {
-//     const sql = `
-//         INSERT INTO trees
-//         (title, height, type)
-//         VALUES (?, ?, ?)
-//     `;
-//     con.query(sql, [req.body.title ?? 0, req.body.height ?? 0, req.body.type ?? 0], (err, result) => {
-//         if (err) throw err
-//         res.send(result)
-//     })
+app.post('/admin/products', (req, res) => {
+    console.log(req.body)
+    const sql = `
+        INSERT INTO products
+        (title, code, price, description)
+        VALUES (?, ?, ?, ?)
+    `;
+    con.query(sql, [req.body.title ?? 0, req.body.code ?? 0, req.body.price ?? 0, req.body.description ?? 0], (err, result) => {
+        if (err) throw err
+        res.send(result)
+    })
 
-// })
+})
 
 // app.post('/animals', (req, res) => {
 //     const sql = `
