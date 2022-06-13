@@ -8,12 +8,26 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import ProductCreate from './ProductCreate';
 import { useRef } from 'react';
+import Modal from './Modal';
 
 function Back() {
   const [products, setProducts] = useState(null)
   const [createdData, setCreatedData] = useState(null)
+  const [selectedData, setSelectedData] = useState(null)
+  const [modalData, setModalData] = useState(null)
   const [lastProductUpdate, setLastProductUpdate] = useState(Date.now())
   const [deleteProduct, setDeleteProduct] = useState(null)
+
+  useEffect(() => {
+    if (!selectedData) return
+
+
+    // axios.delete('http://localhost:3003/admin/products/' + deleteProduct.id)
+    //   .then(res => {
+    //     setLastProductUpdate(Date.now())
+    //     setDeleteProduct(null)
+    //   })
+  }, [selectedData])
 
   useEffect(() => {
     if (!deleteProduct) return
@@ -40,14 +54,23 @@ function Back() {
   }, [lastProductUpdate])
 
   return (
-    <BackContext.Provider value={{ products, setCreatedData, setDeleteProduct }}>
+    <BackContext.Provider value={{
+      products,
+      setCreatedData,
+      setDeleteProduct,
+      setSelectedData,
+      selectedData,
+      setModalData
+
+    }}>
       <div className="container">
         <div className="row">
-
+          <Modal></Modal>
           <Navbar></Navbar>
           <div className='col-5'>
             <ProductCreate></ProductCreate>
           </div>
+
           <ProductList></ProductList>
         </div>
       </div>

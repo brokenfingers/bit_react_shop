@@ -3,7 +3,7 @@ import BackContext from "../../Contexts/BackContext"
 
 function ProductLine({ product }) {
 
-    const { setDeleteProduct } = useContext(BackContext)
+    const { setDeleteProduct, setSelectedData } = useContext(BackContext)
 
     return (
         <li className='list-group-item'>
@@ -27,7 +27,7 @@ function ProductLine({ product }) {
                 </div>
             </div>
             <div className="product-line_buttons">
-                <button type="button" className="btn btn-success me-2">Redaguoti</button>
+                <button type="button" className="btn btn-success me-2" onClick={() => setSelectedData(product)}>Redaguoti</button>
                 <button type="button" className="btn btn-danger" onClick={() => setDeleteProduct(product)}>Trinti</button>
             </div>
         </li>
