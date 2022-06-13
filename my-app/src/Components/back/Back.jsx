@@ -13,7 +13,16 @@ function Back() {
   const [products, setProducts] = useState(null)
   const [createdData, setCreatedData] = useState(null)
   const [lastProductUpdate, setLastProductUpdate] = useState(Date.now())
+  const [deleteProduct, setDeleteProduct] = useState(null)
 
+  useEffect(() => {
+    if (!deleteProduct) return
+    axios.delete('http://localhost:3003/admin/products/' + deleteProduct.id)
+      .then(res => {
+        setLastProductUpdate(Date.now())
+        setDeleteProduct(null)
+      })
+  }, [deleteProduct])
 
   useEffect(() => {
     if (!createdData) return
@@ -31,7 +40,7 @@ function Back() {
   }, [lastProductUpdate])
 
   return (
-    <BackContext.Provider value={{ products, setCreatedData, setProducts }}>
+    <BackContext.Provider value={{ products, setCreatedData, setDeleteProduct }}>
       <div className="container">
         <div className="row">
 

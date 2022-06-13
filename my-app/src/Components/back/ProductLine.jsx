@@ -1,4 +1,9 @@
-function classNameName({ product }) {
+import { useContext } from "react"
+import BackContext from "../../Contexts/BackContext"
+
+function ProductLine({ product }) {
+
+    const { setDeleteProduct } = useContext(BackContext)
 
     return (
         <li className='list-group-item'>
@@ -23,10 +28,10 @@ function classNameName({ product }) {
             </div>
             <div className="product-line_buttons">
                 <button type="button" className="btn btn-success me-2">Redaguoti</button>
-                <button type="button" className="btn btn-danger">Trinti</button>
+                <button type="button" className="btn btn-danger" onClick={() => setDeleteProduct(product)}>Trinti</button>
             </div>
         </li>
     )
 }
 
-export default classNameName
+export default ProductLine

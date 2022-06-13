@@ -69,6 +69,21 @@ app.post('/admin/products', (req, res) => {
 
 })
 
+
+// //DELETE
+
+app.delete('/admin/products/:id', (req, res) => {
+    console.log(req.params.id)
+    const sql = `
+        DELETE FROM products
+        WHERE id = ?
+    `;
+    con.query(sql, [req.params.id], (err, result) => {
+        if (err) throw err;
+        res.send(result)
+    })
+})
+
 // app.post('/animals', (req, res) => {
 //     const sql = `
 //         INSERT INTO animals
