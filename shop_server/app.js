@@ -84,6 +84,20 @@ app.delete('/admin/products/:id', (req, res) => {
     })
 })
 
+// //EDIT
+
+app.put('/admin/products', (req, res) => {
+    const sql = `
+        UPDATE products
+        SET title = ?, code = ?, price = ?, description = ?
+        WHERE id = ?;`;
+
+    con.query(sql, [req.body.title, req.body.code, req.body.price, req.body.description, req.body.id], (err, result) => {
+        if (err) throw err;
+        res.send(result)
+    })
+})
+
 // app.post('/animals', (req, res) => {
 //     const sql = `
 //         INSERT INTO animals

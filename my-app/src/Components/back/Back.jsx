@@ -18,16 +18,16 @@ function Back() {
   const [lastProductUpdate, setLastProductUpdate] = useState(Date.now())
   const [deleteProduct, setDeleteProduct] = useState(null)
 
+
   useEffect(() => {
-    if (!selectedData) return
+    if (!modalData) return
+    axios.put('http://localhost:3003/admin/products', modalData)
+      .then(res => {
+        setLastProductUpdate(Date.now())
+        setModalData(null)
+      })
+  }, [modalData])
 
-
-    // axios.delete('http://localhost:3003/admin/products/' + deleteProduct.id)
-    //   .then(res => {
-    //     setLastProductUpdate(Date.now())
-    //     setDeleteProduct(null)
-    //   })
-  }, [selectedData])
 
   useEffect(() => {
     if (!deleteProduct) return
