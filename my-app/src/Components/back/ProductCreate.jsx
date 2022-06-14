@@ -1,5 +1,6 @@
 import { useContext, useState, useRef } from "react"
 import BackContext from "../../Contexts/BackContext"
+import getBase64 from "../../Functions/getBase64"
 
 const empty = {
     title: '',
@@ -14,14 +15,21 @@ function ProductCreate() {
     const { setCreatedData } = useContext(BackContext)
 
     const [inputs, setInputs] = useState(empty)
-
+    const fileInput = useRef()
     const handleInputs = (ev, targ) => {
         setInputs(inp => ({ ...inp, [targ]: ev.target.value }))
     }
 
     const handleSubmit = (e) => {
-        console.log(inputs)
-        setCreatedData(inputs)
+        const file = fileInput.current.files[0]
+        if (file) {
+            getBase64(file).then(photo => {
+                setCreatedData({ ...inputs, photo })
+            })
+        } else {
+            setCreatedData(inputs)
+        }
+
         setInputs(empty)
         button.current.blur()
     }
@@ -48,6 +56,10 @@ function ProductCreate() {
                 <div className="form-group">
                     <label>Aprašymas</label>
                     <input type="text" className="form-control" onChange={(e) => handleInputs(e, 'description')} />
+                </div>
+                <div className="form-group">
+                    <label>Nuotrauka</label>
+                    <input type="file" ref={fileInput} className="form-control custom-file-input" />
                 </div>
 
                 <button ref={button} type="submit" className="btn btn-primary" onClick={handleSubmit}>Sukurti</button>

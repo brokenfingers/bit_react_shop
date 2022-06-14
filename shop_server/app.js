@@ -24,7 +24,7 @@ con.connect(function (err) {
 app.use(cors())
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json())
+app.use(express.json({ limit: '50mb' }))
 
 
 
@@ -59,10 +59,10 @@ app.post('/admin/products', (req, res) => {
     console.log(req.body)
     const sql = `
         INSERT INTO products
-        (title, code, price, description)
-        VALUES (?, ?, ?, ?)
+        (title, code, price, description, photo)
+        VALUES (?, ?, ?, ?, ?)
     `;
-    con.query(sql, [req.body.title ?? 0, req.body.code ?? 0, req.body.price ?? 0, req.body.description ?? 0], (err, result) => {
+    con.query(sql, [req.body.title ?? 0, req.body.code ?? 0, req.body.price ?? 0, req.body.description ?? 0, req.body.photo ?? null], (err, result) => {
         if (err) throw err
         res.send(result)
     })
