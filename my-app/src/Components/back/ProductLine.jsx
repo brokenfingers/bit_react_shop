@@ -10,7 +10,10 @@ function ProductLine({ product }) {
             <div className="product-line_content">
                 <div className="product-line_content_top">
                     <div className="product-line_image">
-                        <img src="https://picsum.photos/200/300" alt='random generated' />
+                        {/* <img src="https://picsum.photos/200/300" alt='random generated' /> */}
+                        {
+                            product.photo && <img src={product.photo} alt={product.title} />
+                        }
                     </div>
                     <div className="product-line_title">
                         {product.title}

@@ -26,6 +26,7 @@ function ProductCreate() {
             getBase64(file).then(photo => {
                 setCreatedData({ ...inputs, photo })
             })
+            fileInput.current.value = null;
         } else {
             setCreatedData(inputs)
         }

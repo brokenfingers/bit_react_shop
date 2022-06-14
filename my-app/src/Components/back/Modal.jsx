@@ -6,11 +6,13 @@ const empty = {
     title: '',
     price: '',
     code: '',
-    description: ''
+    description: '',
+    photo: ''
 }
 
 function Modal() {
 
+    const fileInput = useRef()
 
     const { selectedData, setModalData, setSelectedData } = useContext(BackContext)
     const [inputs, setInputs] = useState(empty)
@@ -64,8 +66,16 @@ function Modal() {
                                 <label>Aprašymas</label>
                                 <input type="text" className="form-control" value={inputs.description} onChange={(e) => handleInputs(e, 'description')} />
                             </div>
-
-
+                            <div className="form-group">
+                                <label>Nuotrauka</label>
+                                <input type="file" ref={fileInput} className="form-control custom-file-input" defaultValue={inputs.photo} />
+                            </div>
+                            <div className="product-line_image">
+                                {/* <img src="https://picsum.photos/200/300" alt='random generated' /> */}
+                                {
+                                    inputs.photo && <img src={inputs.photo} alt={inputs.title} />
+                                }
+                            </div>
                         </div>
 
                     </div>

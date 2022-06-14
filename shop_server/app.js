@@ -4,6 +4,8 @@ const port = 3003
 const cors = require('cors')
 const mysql = require('mysql');
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '50mb' }))
 const con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -23,8 +25,7 @@ con.connect(function (err) {
 
 app.use(cors())
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json({ limit: '50mb' }))
+
 
 
 
@@ -56,7 +57,6 @@ app.get('/admin/products', (req, res) => {
 // //WRITE
 
 app.post('/admin/products', (req, res) => {
-    console.log(req.body)
     const sql = `
         INSERT INTO products
         (title, code, price, description, photo)
@@ -73,7 +73,7 @@ app.post('/admin/products', (req, res) => {
 // //DELETE
 
 app.delete('/admin/products/:id', (req, res) => {
-    console.log(req.params.id)
+    // console.log(req.params.id)
     const sql = `
         DELETE FROM products
         WHERE id = ?
