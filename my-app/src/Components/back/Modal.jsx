@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { useState, useRef, useEffect } from 'react'
 import BackContext from '../../Contexts/BackContext'
+import getBase64 from '../../Functions/getBase64'
 
 const empty = {
     title: '',
@@ -12,12 +13,12 @@ const empty = {
 
 function Modal() {
 
-    const fileInput = useRef()
+
 
     const { selectedData, setModalData, setSelectedData } = useContext(BackContext)
     const [inputs, setInputs] = useState(empty)
     const save = useRef()
-
+    const fileInputModal = useRef()
     const handleInputs = (ev, targ) => {
         setInputs(inp => ({ ...inp, [targ]: ev.target.value }))
     }
@@ -31,9 +32,20 @@ function Modal() {
         setSelectedData(null)
     }
 
-    const handleSave = () => {
 
-        setModalData(inputs)
+
+    const inputFileChange = () => {
+        const file = fileInputModal.current.files[0]
+        if (file) {
+            getBase64(file).then(photo => {
+                setInputs(data => ({ ...data, photo }))
+            })
+            // fileInputModal.current.value = null;
+        }
+    }
+
+    const handleSave = () => {
+        setModalData(data => ({ ...inputs, photo: inputs.photo || null }))
         closeModal()
     }
 
@@ -68,12 +80,15 @@ function Modal() {
                             </div>
                             <div className="form-group">
                                 <label>Nuotrauka</label>
-                                <input type="file" ref={fileInput} className="form-control custom-file-input" defaultValue={inputs.photo} />
+                                <input type="file" ref={fileInputModal} onChange={inputFileChange} className="form-control custom-file-input" defaultValue={inputs.photo} />
                             </div>
                             <div className="product-line_image">
-                                {/* <img src="https://picsum.photos/200/300" alt='random generated' /> */}
+
                                 {
-                                    inputs.photo && <img src={inputs.photo} alt={inputs.title} />
+                                    inputs.photo && <>
+                                        <img src={inputs.photo} alt={inputs.title} />
+                                        <button type="button" className="btn btn-danger" onClick={() => setInputs(data => ({ ...data, photo: null }))}>Ištrinti nuotrauką</button>
+                                    </>
                                 }
                             </div>
                         </div>
