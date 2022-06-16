@@ -159,6 +159,21 @@ app.put('/admin/products', (req, res) => {
 //     })
 // })
 
+
+//FRONT
+
+app.get('/products', (req, res) => {
+    const sql = `
+    SELECT
+    *
+    FROM products
+    `;
+    con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result)
+    })
+})
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })

@@ -18,7 +18,9 @@
 
             width: 100%;
 
-            &_left {}
+            &_left {
+                padding: 15px
+            }
 
             &_center {}
 
@@ -37,11 +39,42 @@
 
             .product {
                 margin: 20px;
-                padding: 23px;
+                padding: 30px;
                 width: 333px;
-                height: 420px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
                 border: solid 1px rgb(100, 157, 193);
 
+                &_top {
+                    p {
+                        font-size: 1.3rem;
+                        color: grey;
+                        font-style: italic;
+                    }
+
+
+                }
+
+                &_middle {
+                    width: 100%;
+
+                    img {
+                        width: 90%;
+                        max-height: 200px;
+                        object-fit: cover;
+                        object-position: top center;
+                    }
+                }
+
+                &_bottom {
+                    display: flex;
+                    justify-content: space-between;
+
+                    input {
+                        width: 55px;
+                    }
+                }
             }
         }
 
