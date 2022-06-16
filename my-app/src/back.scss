@@ -113,9 +113,10 @@
         &_image {
             display: flex;
             // justify-content: center;
-            width: 100%;
+            max-width: 200px;
             object-fit: cover;
-            height: 200px
+            height: 200px;
+            padding: 1rem
         }
 
         &_title {
